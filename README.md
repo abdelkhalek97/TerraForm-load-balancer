@@ -1,6 +1,6 @@
 # TerraForm-load-balancer
-creating two load balancers , one private and the other public , each sending traffic to their instances
-
+creating two load balancers(application and netowrk) , one private and the other public , each sending traffic to their instances. 
+Sending terraform state file to s3 bucket
 
 ## Installation
 
@@ -23,6 +23,11 @@ in order to make the project work you will need to:
     -terraform init
     
     -terraform apply
+
+
+5- when the apply command finish unhash the terraform block on remote-state.tf and run this command
+    
+    -terraform init
 
 
 
