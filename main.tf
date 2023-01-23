@@ -106,9 +106,7 @@ module "nginx_private" {
   secg_id    = module.securityGroup.sg_id
   name       = "private"
   key_name   = "iti"
-  # connection_type = "ssh"
-  # connection_user = "ubuntu"
-  # connection_private_key = "./iti.pem"
+
 
 }
 
