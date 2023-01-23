@@ -21,13 +21,6 @@ resource "aws_instance" "ec2" {
   provisioner "local-exec" {
     command = "echo Private-ip ${count.index}: ${self.private_ip} >> ./all-ips.txt"
   }
-
-  # connection {
-  #   type        = var.connection_type
-  #   user        = var.connection_user
-  #   host        = self.private_ip
-  #   private_key = file(var.connection_private_key)
-  # }
   tags = {
     Name = "${var.name} ${count.index + 1}"
   }
