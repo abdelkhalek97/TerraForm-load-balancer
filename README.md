@@ -18,6 +18,7 @@ in order to make the project work you will need to:
 3- before terraform initailizing you will need to hash the terraform backend block on remote-state.tf
     
 4- run this commands
+
     -terraform init
     
     -terraform apply
