@@ -7,6 +7,7 @@ creating two load balancers , one private and the other public , each sending tr
 in order to make the project work you will need to:
 
 1-edit these things:
+
   a-provider.tf to match your aws credintails files location
   
   b-add .pem file to the main directory
