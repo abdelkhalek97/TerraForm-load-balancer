@@ -78,7 +78,7 @@ module "appTargetGroup" {
   health_protocol    = "HTTP"
 
   depends_on = [
-    module.Nginx_public.instance_id
+    module.Nginx_public
   ]
 }
 
@@ -99,20 +99,20 @@ module "ApplicationLB" {
 
 
 module "nginx_private" {
-  source     = "./Ec2privateNginx"
-  ami_id     = "ami-06878d265978313ca"
-  instType   = "t2.micro"
-  subnet_ids = module.vpc.priv_subnet_id
-  secg_id    = module.securityGroup.sg_id
-  name       = "private"
-  key_name   = "iti"
+  source          = "./Ec2nginx"
+  ami_id_priv     = "ami-06878d265978313ca"
+  instType_priv   = "t2.micro"
+  subnet_ids_priv = module.vpc.priv_subnet_id
+  secg_id_priv    = module.securityGroup.sg_id
+  name_priv       = "private"
+  key_name_priv   = "iti"
 
 
 }
 
 module "netTargetGroup" {
   source             = "./TargetGroup"
-  ec2ids             = module.nginx_private.instance_id
+  ec2ids             = module.nginx_private.instance_id_priv
   vpcid              = module.vpc.vpc_id
   attach_target_port = 80
   target_name        = "network"

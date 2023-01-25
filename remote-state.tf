@@ -12,12 +12,12 @@ module "backend_dynamodb" {
   attribute_type = "S"
 }
 
-terraform {
-  backend "s3" {
-    bucket         = "up-and-running-stat"
-    key            = "dev/terraform.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "locks-dynamodb-table"
-    encrypt        = true
-  }
-}
+# terraform {
+#   backend "s3" {
+#     bucket         = "up-and-running-stat"
+#     key            = "dev/terraform.tfstate"
+#     region         = "us-east-1"
+#     dynamodb_table = "locks-dynamodb-table"
+#     encrypt        = true
+#   }
+# }
