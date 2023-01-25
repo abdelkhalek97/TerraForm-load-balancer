@@ -1,12 +1,12 @@
 module "backend_s3" {
   source                          = "./s3"
-  bucket_name                     = "up-and-running-stat"
+  bucket_name                     = "back-state-bucket"
   bucket_versioning_configuration = "Enabled"
 }
 
 module "backend_dynamodb" {
   source         = "./dynamoDB"
-  table_name     = "locks-dynamodb-table"
+  table_name     = "DynamoDB-state"
   table_hash_key = "LockID"
   attribute_name = "LockID"
   attribute_type = "S"
@@ -14,10 +14,10 @@ module "backend_dynamodb" {
 
 # terraform {
 #   backend "s3" {
-#     bucket         = "up-and-running-stat"
+#     bucket         = "back-state-bucket"
 #     key            = "dev/terraform.tfstate"
 #     region         = "us-east-1"
-#     dynamodb_table = "locks-dynamodb-table"
+#     dynamodb_table = "DynamoDB-state"
 #     encrypt        = true
 #   }
 # }

@@ -67,8 +67,9 @@ module "Nginx_public" {
 
 }
 
-module "appTargetGroup" {
-  source             = "./TargetGroup"
+
+module "ApplicationLB" {
+  source             = "./APPloadBalancer"
   ec2ids             = module.Nginx_public.instance_id
   vpcid              = module.vpc.vpc_id
   attach_target_port = 80
@@ -76,24 +77,15 @@ module "appTargetGroup" {
   target_port        = 80
   target_protocol    = "HTTP"
   health_protocol    = "HTTP"
+  name               = "ALB"
+  sg_id              = module.securityGroup.sg_id
+  subnets            = module.vpc.pup_subnet_id
+  lb_internal        = false
+  listener_port      = 80
+  listener_protocol  = "HTTP"
 
   depends_on = [
     module.Nginx_public
-  ]
-}
-
-module "ApplicationLB" {
-  source            = "./APPloadBalancer"
-  name              = "ALB"
-  sg_id             = module.securityGroup.sg_id
-  subnets           = module.vpc.pup_subnet_id
-  target_group_arn  = module.appTargetGroup.Targetgroup_arn
-  lb_internal       = false
-  listener_port     = 80
-  listener_protocol = "HTTP"
-
-  depends_on = [
-    module.appTargetGroup.Targetgroup_arn
   ]
 }
 
@@ -110,8 +102,9 @@ module "nginx_private" {
 
 }
 
-module "netTargetGroup" {
-  source             = "./TargetGroup"
+
+module "NetwowrkLB" {
+  source             = "./NetloadBalancer"
   ec2ids             = module.nginx_private.instance_id_priv
   vpcid              = module.vpc.vpc_id
   attach_target_port = 80
@@ -119,24 +112,14 @@ module "netTargetGroup" {
   target_port        = 80
   target_protocol    = "TCP"
   health_protocol    = "TCP"
+  name               = "NLB"
+  subnets            = module.vpc.priv_subnet_id
+  lb_internal        = true
+  listener_port      = 80
+  listener_protocol  = "TCP"
+
   depends_on = [
     module.nginx_private
-  ]
-}
-
-
-
-module "NetwowrkLB" {
-  source            = "./NetloadBalancer"
-  name              = "NLB"
-  subnets           = module.vpc.priv_subnet_id
-  target_group_arn  = module.netTargetGroup.Targetgroup_arn
-  lb_internal       = true
-  listener_port     = 80
-  listener_protocol = "TCP"
-
-  depends_on = [
-    module.netTargetGroup.Targetgroup_arn
   ]
 
 }
