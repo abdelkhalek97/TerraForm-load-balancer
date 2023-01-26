@@ -21,7 +21,7 @@ module "natG" {
 }
 
 module "routing_public" {
-  source              = "./routeTablePublic"
+  source              = "./routeTable"
   vpcid               = module.vpc.vpc_id
   internetGatewayName = module.internetgateway1.ig-id
   tableName           = "public Route Table"
@@ -29,7 +29,7 @@ module "routing_public" {
 }
 
 module "routing_private" {
-  source         = "./routeTablePrivate"
+  source         = "./routeTable"
   vpcid          = module.vpc.vpc_id
   natGatewayName = module.natG.nat_id
   tableName      = "private Route Table"

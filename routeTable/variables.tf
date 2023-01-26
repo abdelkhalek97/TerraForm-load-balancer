@@ -14,6 +14,7 @@ variable "vpcid" {
 
 variable "natGatewayName" {
   type        = string
+  default = ""
   description = "ig id"
 
 }
@@ -26,4 +27,11 @@ variable "tableName" {
 
 variable "subnet_ids" {
   type = list(string)
+}
+
+variable "internetGatewayName" {
+  type        = string
+  default = ""
+  description = "ig id"
+
 }
