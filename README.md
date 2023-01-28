@@ -12,7 +12,7 @@ in order to make the project work you will need to:
   
   b-add .pem file to the main directory
   
-  c-on main.tf line 60 , 63 , 108 
+  c-on main.tf line 60 , 63 , 100 
     edit the key_name and connection_private_key to match yours
 
 
